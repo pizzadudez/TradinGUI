@@ -1,0 +1,2 @@
+export const FETCH_BANKERS = 'FETCH_BANKERS';
+export const UPDATE_BANKER = 'UPDATE_BANKER';
