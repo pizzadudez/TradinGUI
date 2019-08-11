@@ -3,6 +3,7 @@ import { CLICK_BANKER, FETCH_BANKERS } from '../actions/types';
 const initialState = {
   bankers: [],
   accounts: [],
+  selectedIds: [],
 };
 
 export default function(state = initialState, action) {
