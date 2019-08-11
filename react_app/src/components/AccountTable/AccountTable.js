@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBankers } from '../../actions/postActions';
-import { clickBanker } from '../../actions/clickActions';
+import { fetchBankers } from '../../actions/bankersActions';
+import { clickBanker } from '../../actions/bankersActions';
 
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -38,12 +38,11 @@ class AccountTable extends Component {
       },
     })(Button);
 
-    const bankers = this.props.bankers.map((banker, idx) => (
+    const bankers = this.props.bankers.map(banker => (
       <StyledButton
-        key={idx}
+        key={banker.id}
         disabled={banker.trade_confirmation ? true : false}
-        banker={banker}
-        onClick={() => this.props.clickBanker(idx)}
+        onClick={() => this.props.clickBanker(banker.id)}
       >
         {banker.name}
       </StyledButton>
@@ -63,8 +62,8 @@ class AccountTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  bankers: state.posts.bankers.filter(banker => banker.account === 1),
-  accounts: [...new Set(state.posts.bankers.map(banker => banker.account))]
+  bankers: state.bankers.bankers.filter(banker => banker.account === 1),
+  accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
 });
 
 export default connect(mapStateToProps, { fetchBankers, clickBanker })(AccountTable);

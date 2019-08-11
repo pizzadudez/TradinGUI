@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-import postReducer from './postReducer';
-import bankerReducer from './bankerReducer';
+import bankersReducer from './bankersReducer';
 
 export default combineReducers({
-  posts: postReducer,
-  bankers: bankerReducer,
+  bankers: bankersReducer,
 });
