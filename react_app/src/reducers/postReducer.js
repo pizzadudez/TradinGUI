@@ -2,7 +2,7 @@ import { FETCH_BANKERS } from '../actions/types';
 
 const initialState = {
   bankers: [],
-  banker: {},
+  accounts: [],
 };
 
 export default function(state = initialState, action) {

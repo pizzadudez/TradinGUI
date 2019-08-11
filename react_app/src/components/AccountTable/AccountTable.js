@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBankers } from '../../actions/postActions';
+import { clickBanker } from '../../actions/clickActions';
 
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -8,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import { grey } from '@material-ui/core/colors';
 
 
 class AccountTable extends Component {
@@ -36,16 +38,26 @@ class AccountTable extends Component {
       },
     })(Button);
 
-    const bankers = this.props.bankers.map(banker => (
-      <StyledButton disabled={banker.realm === 'Blackmoore' ? true : false} >
+    const bankers = this.props.bankers.map((banker, idx) => (
+      <StyledButton
+        key={idx}
+        disabled={banker.trade_confirmation ? true : false}
+        banker={banker}
+        onClick={() => this.props.clickBanker(idx)}
+      >
         {banker.name}
       </StyledButton>
     ));
 
     return (
-      <StyledList>
-        {bankers}
-      </StyledList>
+      <div className="Box">
+        <StyledList>
+          {bankers}
+        </StyledList>
+        <StyledList>
+          {bankers}
+        </StyledList>
+      </div>
     ); 
   }
 }
@@ -55,4 +67,4 @@ const mapStateToProps = state => ({
   accounts: [...new Set(state.posts.bankers.map(banker => banker.account))]
 });
 
-export default connect(mapStateToProps, { fetchBankers })(AccountTable);
+export default connect(mapStateToProps, { fetchBankers, clickBanker })(AccountTable);
