@@ -14,7 +14,7 @@ class AccountTable extends Component {
 
   render() {
     const lists = this.props.accounts.map(accNum => 
-      <BankerList key={accNum} accNum={accNum} />
+      <BankerList key={accNum} filterProp={'account'} filterPropVal={accNum} />
     );
 
     return (

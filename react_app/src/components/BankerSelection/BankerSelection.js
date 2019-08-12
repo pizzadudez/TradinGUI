@@ -9,7 +9,12 @@ class BankerSelection extends Component {
   render() {
     return (
       <Container>
-        <BankerList>
+        <BankerList
+          key={true}
+          filterProp={'trade_confirmation'} 
+          filterPropVal={true}
+          // bankers={this.props.selected}
+        >
           <p>BankerSelection</p>
         </BankerList>
       </Container>
@@ -17,8 +22,8 @@ class BankerSelection extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  selected: state.bankers.bankers.filter(banker => banker.trade_confirmed)
-};
+const mapStateToProps = state => ({
+  selected: state.bankers.bankers.filter(banker => banker.trade_confirmation),
+});
 
 export default connect(mapStateToProps)(BankerSelection);

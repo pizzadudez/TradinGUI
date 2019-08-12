@@ -3,7 +3,7 @@ import { CLICK_BANKER, FETCH_BANKERS } from '../actions/types';
 const initialState = {
   bankers: [],
   accounts: [],
-  selectedIds: [],
+  selectedBankers: [],
 };
 
 export default function(state = initialState, action) {
@@ -20,7 +20,6 @@ export default function(state = initialState, action) {
         ? {...banker, trade_confirmation: true} 
         : banker),
       };
-      console.log(newState.bankers[action.id]);
       return newState;
     }
     default:

@@ -20,18 +20,21 @@ class BankerList extends Component {
 
     const StyledButton = withStyles({
       root: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-        borderRadius: 3,
+        background: 'linear-gradient(45deg, #6ab8cc 40%, #84e2fa 90%)',
+        borderRadius: 1,
         border: 0,
         width: 80,
         fontSize: 9,
         marginBottom: 2,
         padding: '2px 3px',
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        boxShadow: '0 0 1px 1px rgba(0, 0, 0, .3)',
         textTransform: 'none',
         overflow: 'hidden',
         display: 'inline-block',
       },
+      disabled: {
+        background: 'linear-gradient(45deg, #858585 30%, #a8a5a5 90%)',
+      }
     })(Button);
 
     const bankers = this.props.bankers.map(banker => (
@@ -53,7 +56,9 @@ class BankerList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  bankers: state.bankers.bankers.filter(banker => banker.account === ownProps.accNum),
+  bankers: state.bankers.bankers.filter(banker => 
+    banker[ownProps.filterProp] === ownProps.filterPropVal
+  ),
 });
 
 export default connect(mapStateToProps, { clickBanker })(BankerList);
