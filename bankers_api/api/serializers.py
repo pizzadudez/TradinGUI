@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Banker
+from api.models import Banker, Realm
 
 
 class BankerSerializer(serializers.ModelSerializer):
@@ -15,3 +15,8 @@ class BankerSerializer(serializers.ModelSerializer):
             'trade_timestamp',
             'trade_confirmation',
         ]
+
+class RealmSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Realm
+        fields = ['id', 'realm', 'code', 'price_per_mil']

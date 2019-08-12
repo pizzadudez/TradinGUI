@@ -17,3 +17,17 @@ class Banker(models.Model):
     class Meta:
         managed = False
         db_table = 'bankers'
+
+
+class Realm(models.Model):
+    id = models.IntegerField(primary_key=True)
+    realm = models.TextField()
+    code = models.TextField()
+    price_per_mil = models.IntegerField()
+
+    def __str__(self):
+        return self.realm
+
+    class Meta:
+        managed = False
+        db_table = 'realms'

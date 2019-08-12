@@ -1,9 +1,10 @@
-import { CLICK_BANKER, FETCH_BANKERS } from '../actions/types';
+import { SELECT_BANKER, FETCH_BANKERS, UPDATE_BANKER, CHANGE_TIMESTAMP } from '../actions/types';
 
 const initialState = {
   bankers: [],
   accounts: [],
-  selectedBankers: [],
+  selectedBankersIds: [],
+  timestamp: null,
 };
 
 export default function(state = initialState, action) {
@@ -13,15 +14,27 @@ export default function(state = initialState, action) {
         ...state,
         bankers: action.payload,
       }
-    case CLICK_BANKER:{
+    case SELECT_BANKER: {
       const newState = {
         ...state,
-        bankers: state.bankers.map(banker => banker.id === action.id
-        ? {...banker, trade_confirmation: true} 
-        : banker),
+        selectedBankersIds: [...state.selectedBankersIds, action.id],
       };
       return newState;
     }
+    case UPDATE_BANKER:
+      return {
+        ...state,
+        bankers: state.bankers.map(banker => 
+          action.id === banker.id
+          ? {...banker, trade_timestamp: action.timestamp, trade_confirmation: 1}
+          : banker
+        ),
+      }
+    case CHANGE_TIMESTAMP:
+      return {
+        ...state,
+        timestamp: action.date,
+      }
     default:
       return state;
   }

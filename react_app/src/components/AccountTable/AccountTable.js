@@ -8,7 +8,8 @@ import Container from '@material-ui/core/Container';
 
 
 class AccountTable extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     this.props.fetchBankers();
   }
 

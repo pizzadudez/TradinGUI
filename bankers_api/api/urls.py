@@ -11,6 +11,7 @@ from api import views
 urlpatterns = [
     path('bankers/', views.BankerList.as_view()),
     path('bankers/<int:pk>/', views.BankerDetail.as_view()),
+    path('realms/', views.RealmList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
