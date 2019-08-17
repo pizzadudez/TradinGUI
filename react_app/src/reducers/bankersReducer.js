@@ -1,4 +1,4 @@
-import { SELECT_BANKER, FETCH_BANKERS, UPDATE_BANKER, CHANGE_TIMESTAMP } from '../actions/types';
+import { SELECT_BANKER, FETCH_BANKERS, UPDATE_BANKER, CHANGE_TIMESTAMP, FETCH_REALMS } from '../actions/types';
 
 const initialState = {
   bankers: [],
@@ -13,6 +13,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         bankers: action.payload,
+      }
+    case FETCH_REALMS:
+      return {
+        ...state,
+        realms: action.payload,
       }
     case SELECT_BANKER: {
       const newState = {

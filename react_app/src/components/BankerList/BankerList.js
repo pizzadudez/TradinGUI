@@ -12,7 +12,7 @@ class BankerList extends Component {
   render() {
     const StyledList = withStyles({
       root: {
-        width: 80,
+        width: 76,
         float: 'left',
         marginLeft: 4,
       },
@@ -20,11 +20,11 @@ class BankerList extends Component {
 
     const StyledButton = withStyles({
       root: {
-        background: 'linear-gradient(45deg, #6ab8cc 40%, #84e2fa 90%)',
+        background: 'linear-gradient(45deg, #2ea8ff 40%, #54b8ff 90%)',
         borderRadius: 1,
         border: 0,
-        width: 80,
-        fontSize: 9,
+        width: '100%',
+        fontSize: 11,
         marginBottom: 2,
         padding: '2px 3px',
         boxShadow: '0 0 1px 1px rgba(0, 0, 0, .3)',
@@ -42,8 +42,10 @@ class BankerList extends Component {
         key={banker.id}
         disabled={banker.trade_confirmation ? true : false}
         onClick={() => this.props.clickBanker(banker.id)}
+        style={banker.bank_num === 0 ? {background: 'orange'} : {}}
       >
-        {[banker.bank_num, banker.realm].join(' ')}
+        {[this.props.realms[banker.realm].code, 
+          banker.bank_num, Math.round(banker.bank_gold/1000)].join(' ')}
       </StyledButton>
     ));
 
@@ -59,6 +61,7 @@ const mapStateToProps = (state, ownProps) => ({
   bankers: state.bankers.bankers.filter(banker => 
     banker[ownProps.filterProp] === ownProps.filterPropVal
   ),
+  realms: state.bankers.realms,
 });
 
 export default connect(mapStateToProps, { clickBanker })(BankerList);

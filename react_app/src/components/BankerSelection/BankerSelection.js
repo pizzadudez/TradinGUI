@@ -20,22 +20,28 @@ class BankerSelection extends Component {
           disabled={banker.trade_confirmation ? true : false}
           banker={banker}
           onClick={() => this.props.updateBanker(banker, this.props.timestamp.getTime())}
-          style={{background: 'grey', margin: 2,}}
+          style={{background: 'grey', margin: 2, 'text-transform': 'none'}}
         >
-          {[banker.account, banker.realm, banker.name].join(' ')}
+          {[banker.account, banker.name,
+            banker.realm].join(' ')}
         </Button>
       ));
-
+    
+      const realmList = this.props.selectedBankers.sort((a, b) => (a.account - b.account))
+            .map(banker => <li>{banker.realm}</li>)
 
     return (
       <Container>
         <List>
           {selectedBankers}
         </List>
-          <DatePicker
-            selected={this.props.timestamp}
-            onChange={(date) => this.props.changeTimestamp(date)}
-          />
+        <DatePicker
+          selected={this.props.timestamp}
+          onChange={(date) => this.props.changeTimestamp(date)}
+        />
+        <ul>
+          {realmList}
+        </ul>
       </Container>
     );
   }
@@ -46,6 +52,7 @@ const mapStateToProps = state => ({
     state.bankers.selectedBankersIds.includes(banker.id)
   ),
   timestamp: state.bankers.timestamp,
+  realms: state.bankers.realms,
 });
 
 export default connect(mapStateToProps, { updateBanker, changeTimestamp })(BankerSelection);
