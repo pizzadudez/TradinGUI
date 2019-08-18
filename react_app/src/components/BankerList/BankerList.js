@@ -37,12 +37,16 @@ class BankerList extends Component {
       }
     })(Button);
 
+    const orangeButton = {
+      background: 'orange',
+    }
+
     const bankers = this.props.bankers.map(banker => (
       <StyledButton
         key={banker.id}
         disabled={banker.trade_confirmation ? true : false}
         onClick={() => this.props.clickBanker(banker.id)}
-        style={banker.bank_num === 0 ? {background: 'orange'} : {}}
+        style={banker.bank_num === 0 ? orangeButton : {}}
       >
         {[this.props.realms[banker.realm].code, 
           banker.bank_num, Math.round(banker.bank_gold/1000)].join(' ')}
