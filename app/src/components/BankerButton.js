@@ -56,13 +56,20 @@ class BankerButton extends Component {
     }
 
     const buttonText = [
+      this.props.banker.account,
       this.props.realms[this.props.banker.realm].code,
       this.props.banker.bank_num,
     ].join(' ');
 
     return (
       <Button
-        disabled={this.props.banker.realm === 'Blackmoore' ? true : false}
+        onClick={this.props.onClick}
+        disabled={
+          this.props.selected
+          ? this.props.banker.trade_confirmation == 1
+          : this.props.selectedIds.includes(this.props.banker.id)
+          || this.props.banker.trade_confirmation == 1
+        }   
       >
         {buttonText}
       </Button>
@@ -73,6 +80,7 @@ class BankerButton extends Component {
 const mapStateToProps = (state, ownProps) => ({
   banker: state.bankers.bankers[ownProps.bankerId-1],
   realms: state.bankers.realms,
+  selectedIds: state.bankers.selectedIds,
 });
 
 export default connect(mapStateToProps, { selectBanker })(BankerButton);

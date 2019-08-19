@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import AccountsTable from './components/AccountsTable';
 
 import styled from 'styled-components';
+import AccountsTable from './components/AccountsTable';
+import BankerSelection from './components/BankerSelection';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,10 +23,10 @@ class App extends Component {
       <>
         <Wrapper>
           <Container>
-            <AccountsTable />
+            <BankerSelection />
           </Container>
           <Container>
-            item2
+            <AccountsTable />
           </Container>
         </Wrapper>
       </>

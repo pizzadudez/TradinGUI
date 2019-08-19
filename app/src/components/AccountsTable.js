@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBankers, fetchRealms } from '../actions/bankersActions';
+import { fetchBankers, fetchRealms, selectBanker } from '../actions/bankersActions';
 
 import styled from 'styled-components';
 import BankerButton from './BankerButton';
@@ -32,8 +32,11 @@ class AccountsTable extends Component {
         <ColumnHeader>{accNum}</ColumnHeader>
         {this.props.bankers.filter(banker => banker.account === accNum)
           .map(banker => (
-            <BankerButton key={banker.id} bankerId={banker.id} />
-            //<p>{banker.account}</p>
+            <BankerButton 
+              key={banker.id} 
+              bankerId={banker.id}
+              onClick={() => this.props.selectBanker(banker.id)}    
+            />
           ))
         }
       </AccountColumn>
@@ -52,4 +55,7 @@ const mapStateToProps = state => ({
   accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
 });
 
-export default connect(mapStateToProps, { fetchBankers, fetchRealms })(AccountsTable);
+export default connect(
+  mapStateToProps, 
+  { fetchBankers, fetchRealms, selectBanker }
+)(AccountsTable);

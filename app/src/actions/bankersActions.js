@@ -2,6 +2,7 @@ import {
   FETCH_BANKERS,
   FETCH_REALMS,
   SELECT_BANKER,
+  UPDATE_BANKER,
 } from './types';
 
 import axios from 'axios';
@@ -31,9 +32,20 @@ export const fetchRealms = () => dispatch => {
   });
 };
 
-export const selectBanker = (idx) => dispatch => {
+export const selectBanker = id => dispatch => {
   dispatch({
     type: SELECT_BANKER,
-    idx: idx,
+    id: id,
+  });
+};
+
+export const updateBanker = (banker, timestamp) => dispatch => {
+  axios.put('http://127.0.0.1:8000/bankers/' + banker.id + '/',
+    {...banker, trade_timestamp: timestamp, trade_confirmation: 1}
+  );
+  dispatch({
+    type: UPDATE_BANKER,
+    id: banker.id,
+    timestamp: timestamp,
   });
 };
