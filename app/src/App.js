@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import AccountsTable from './components/AccountsTable';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2px;
+`;
+
+const Container = styled.div`
+  border: 1px black solid;
+  margin: 2px;
+  padding: 1px;
+`;
+
+
+class App extends Component {
+  render() {
+    return (
+      <>
+        <Wrapper>
+          <Container>
+            <AccountsTable />
+          </Container>
+          <Container>
+            item2
+          </Container>
+        </Wrapper>
+      </>
+    );
+  }
 }
 
 export default App;
