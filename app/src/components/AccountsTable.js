@@ -27,6 +27,10 @@ class AccountsTable extends Component {
   }
 
   render() {
+    if (this.props.bankers.length < 1  || this.props.realms.length < 1) {
+      return null;
+    }
+
     const accountColumns = this.props.accounts.map(accNum => (
       <AccountColumn key={accNum}>
         <ColumnHeader>{accNum}</ColumnHeader>
@@ -52,6 +56,7 @@ class AccountsTable extends Component {
 
 const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
+  realms: state.bankers.realms,
   accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
 });
 

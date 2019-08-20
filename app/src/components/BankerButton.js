@@ -26,7 +26,7 @@ const Button = styled.button`
   background-color: ${props => props.selected ? '#7ff238' : '#ffd561'};
   width: ${props => props.selected ? '180px' : '80px'};
   height: ${props => props.selected ? '48px' : '28px'};
-  font-size: ${props => props.selected ? '16px' : '13px'}
+  font-size: ${props => props.selected ? '16px' : '13px'};
 
   &:disabled {
     background-color: ${props => props.selected ? '#e4ffd4' : '#DFDFDF'} !important;
@@ -53,10 +53,6 @@ const Button = styled.button`
 
 class BankerButton extends Component {
   render() {
-    if (!this.props.banker || this.props.realms.length < 0) {
-      return null;
-    }
-
     const buttonText = this.props.selected
     ? [
       this.props.banker.account,

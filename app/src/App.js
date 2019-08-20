@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import AccountsTable from './components/AccountsTable';
 import BankerSelection from './components/BankerSelection';
+import TradeList from './components/TradeList';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ class App extends Component {
             <AccountsTable />
           </Container>
         </Wrapper>
+        <TradeList />
       </>
     );
   }
