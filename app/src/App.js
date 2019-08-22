@@ -17,9 +17,47 @@ const Container = styled.div`
   padding: 1px;
 `;
 
+const GridLayout = styled.div`
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 100px 2fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
+  grid-template-areas:
+  'nav nav nav'
+  'stats selection .'
+  'stats table table'
+  'sessions table table';
+`;
+
+const GridItem = styled.div`
+`;
+
+const _AccountsTable = styled(AccountsTable)`
+  grid-area: table;
+  width: 100%;
+`;
+
+const _BankerSelection = styled(BankerSelection)`
+  grid-area: selection;
+`;
+
+const _TradeList = styled(TradeList)`
+  grid-area: sessions;
+`;
+
 
 class App extends Component {
   render() {
+    return(
+      <GridLayout>
+        <GridItem style={{gridArea: 'nav', background: 'grey',}}>Navbar</GridItem>
+        <GridItem style={{gridArea: 'stats', background: 'white',}}>Stats</GridItem>
+        <_TradeList />
+        <_BankerSelection />
+        <_AccountsTable />
+      </GridLayout>
+    );
+    /*
     return (
       <>
         <Wrapper>
@@ -33,6 +71,7 @@ class App extends Component {
         <TradeList />
       </>
     );
+    */
   }
 }
 

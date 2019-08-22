@@ -47,7 +47,7 @@ class AccountsTable extends Component {
     ));
 
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         {accountColumns}
       </Wrapper>
     );

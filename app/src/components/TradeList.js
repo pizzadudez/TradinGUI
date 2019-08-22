@@ -30,16 +30,16 @@ class TradeList extends Component {
         <ol style={{marginTop: "2px",}}>
           {session.map(banker => (
             <StyledLi key={banker.id}>
-            {[Math.round(banker.bank_gold / 1000) / 1000,
+            {[Math.round(banker.bank_gold / 1000) / 1000, 'm:', 
               [banker.name, banker.realm].join('-')].join(' ')}
             </StyledLi>
-            ))}
+          ))}
         </ol>
       </div>
     ));
 
     return (
-      <div style={{display: "flex", flexWrap: "wrap"}}>
+      <div className={this.props.className} style={{display: "flex", flexWrap: "wrap"}}>
         {tradeSessions}
       </div>
     );

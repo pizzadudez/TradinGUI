@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import BankerButton from './BankerButton';
 
 const Wrapper = styled.div`
-  
+  display: flex;
 `;
 
 class BankerSelection extends Component {
@@ -20,7 +20,7 @@ class BankerSelection extends Component {
       />
     ));
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         {selectedBankers}
       </Wrapper>
     );
