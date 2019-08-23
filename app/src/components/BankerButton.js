@@ -12,7 +12,7 @@ const Button = styled.button`
   cursor: pointer;
   padding: 1px 4px;
   overflow: hidden;
-  margin: 3px;
+  margin-bottom: 5px;
   z-index: 1;
   transition: .3s ease-in-out;
   text-align: center;
@@ -23,13 +23,13 @@ const Button = styled.button`
     0 3px 1px -2px rgba(0,0,0,0.12),
     0 1px 5px 0 rgba(0,0,0,0.2);
 
-  background-color: ${props => props.selected ? '#7ff238' : '#ffd561'};
-  width: ${props => props.selected ? '180px' : '80px'};
+  background-color: ${props => props.selected ? '#ffc66d' : '#ffd561'};
+  width: ${props => props.selected ? '120px' : '80px'};
   height: ${props => props.selected ? '48px' : '28px'};
-  font-size: ${props => props.selected ? '16px' : '13px'};
+  font-size: ${props => props.selected ? '14.5px' : '13px'};
 
   &:disabled {
-    background-color: ${props => props.selected ? '#e4ffd4' : '#DFDFDF'} !important;
+    background-color: ${props => props.selected ? '#d4c7a2' : '#DFDFDF'} !important;
     color: ${props => props.selected ? '#a3a3a3' : '#9f9f9f'} !important;
     pointer-events: none;
     cursor: default;
@@ -37,7 +37,7 @@ const Button = styled.button`
   }
   
   &:hover {
-    background: ${props => props.selected ? '#38d130' : '#ffa930'};
+    background: ${props => props.selected ? '#f3a52b' : '#ffa930'};
   } 
 
   &:focus {
@@ -45,7 +45,7 @@ const Button = styled.button`
   }
 
   &:active {
-    background: ${props => props.selected ? '#2c9e26' : '#db7c32'};
+    background: ${props => props.selected ? '#d48100' : '#db7c32'};
     transition: .1s ease-in-out;
     transform: translateY(0.5px) translateX(0.5px);
   }

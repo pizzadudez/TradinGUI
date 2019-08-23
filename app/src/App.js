@@ -2,39 +2,39 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import AccountsTable from './components/AccountsTable';
+import RealmList from './components/RealmList';
 import BankerSelection from './components/BankerSelection';
 import TradeList from './components/TradeList';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 2px;
-`;
-
-const Container = styled.div`
-  border: 1px black solid;
-  margin: 2px;
-  padding: 1px;
-`;
 
 const GridLayout = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-rows: 40px 100px 2fr 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
+  grid-template-rows: 40px 350px auto;
+  grid-template-columns: 0px 350px minmax(516px, 886px) auto 0px;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
   grid-template-areas:
-  'nav nav nav'
-  'stats selection .'
-  'stats table table'
-  'sessions table table';
+  'nav nav nav nav nav'
+  '. stats innergrid realm .'
+  '. sessions innergrid realm .';
 `;
 
-const GridItem = styled.div`
+const InnerGrid = styled.div`
+  grid-area: innergrid;
+  display: grid;
+  grid-template-rows: minmax(116px, auto) 1fr;
+  grid-row-gap: 10px;
+  grid-template-areas:
+  'selection'
+  'table';
 `;
 
 const _AccountsTable = styled(AccountsTable)`
   grid-area: table;
-  width: 100%;
+`;
+
+const _RealmList = styled(RealmList)`
+  grid-area: table;
 `;
 
 const _BankerSelection = styled(BankerSelection)`
@@ -50,28 +50,17 @@ class App extends Component {
   render() {
     return(
       <GridLayout>
-        <GridItem style={{gridArea: 'nav', background: 'grey',}}>Navbar</GridItem>
-        <GridItem style={{gridArea: 'stats', background: 'white',}}>Stats</GridItem>
+        <div style={{gridArea: 'nav', background: 'grey',}}>Navbar</div>
+        <div style={{gridArea: 'stats', background: 'lightgrey',
+      boxShadow: '3px 6px 6px 0 rgba(0,0,0,0.3)', borderRadius: '4px',}}>Stats</div>
         <_TradeList />
-        <_BankerSelection />
-        <_AccountsTable />
+        <InnerGrid>
+          <_BankerSelection />
+          <_AccountsTable />
+          <_RealmList />
+        </InnerGrid>
       </GridLayout>
     );
-    /*
-    return (
-      <>
-        <Wrapper>
-          <Container>
-            <BankerSelection />
-          </Container>
-          <Container>
-            <AccountsTable />
-          </Container>
-        </Wrapper>
-        <TradeList />
-      </>
-    );
-    */
   }
 }
 

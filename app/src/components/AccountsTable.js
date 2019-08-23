@@ -5,18 +5,20 @@ import { fetchBankers, fetchRealms, selectBanker } from '../actions/bankersActio
 import styled from 'styled-components';
 import BankerButton from './BankerButton';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 80px);
+  grid-column-gap: 5px;
 `;
 
 const AccountColumn = styled.div`
-  margin-bottom: 3px;
+  text-align: center;
 `;
 
-const ColumnHeader = styled.span`
-  font-size: 12px;
-  justify-content: center;
+const ColumnHeader = styled.div`
+  font-size: 17px;
+  color: white;
+  margin-bottom: 3px;
 `;
 
 class AccountsTable extends Component {
@@ -47,9 +49,9 @@ class AccountsTable extends Component {
     ));
 
     return (
-      <Wrapper className={this.props.className}>
+      <Grid className={this.props.className}>
         {accountColumns}
-      </Wrapper>
+      </Grid>
     );
   }
 }

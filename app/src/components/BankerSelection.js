@@ -5,8 +5,10 @@ import { updateBanker } from '../actions/bankersActions'
 import styled from 'styled-components';
 import BankerButton from './BankerButton';
 
-const Wrapper = styled.div`
-  display: flex;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 120px);
+  grid-column-gap: 5px;
 `;
 
 class BankerSelection extends Component {
@@ -20,9 +22,9 @@ class BankerSelection extends Component {
       />
     ));
     return (
-      <Wrapper className={this.props.className}>
+      <Grid className={this.props.className}>
         {selectedBankers}
-      </Wrapper>
+      </Grid>
     );
   }
 }
