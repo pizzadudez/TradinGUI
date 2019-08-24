@@ -12,23 +12,22 @@ const Grid = styled.div`
 
 const RealmContainer = styled.div`
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(80px, max-content));
   grid-column-gap: 3px;
-  grid-template-areas:
-  'name buttons';
+  justify-items: end;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
 `;
 
-const RealmButtons = styled.div`
-  grid-area: buttons;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 80px);
-  grid-column-gap: 5px;
-`;
-
-const RealmName = styled.div`
-  grid-area: name;
+const RealmName = styled.span`
+  width: 100%;
+  display: block;
   color: white;
   font-size: 17px;
+  justify-self: start;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 class RealmList extends Component {
@@ -40,16 +39,16 @@ class RealmList extends Component {
     const realmList = this.props.realms.map(realm => (
       <RealmContainer>
         <RealmName>{realm}</RealmName>
-        <RealmButtons key={realm}>
-          {this.props.bankers.filter(banker => banker.realm === realm)
-            .map(banker => (    
-              <BankerButton
-              key={banker.id}
-              bankerId={banker.id}
-              onClick={() => this.props.selectBanker(banker.id)}
-              />
-              ))}
-            </RealmButtons>
+        {this.props.bankers.filter(banker => banker.realm === realm)
+          .map(banker => (   
+            <BankerButton
+            key={banker.id}
+            bankerId={banker.id}
+            onClick={() => this.props.selectBanker(banker.id)}
+            style={{justifySelf: 'end',}}
+            />
+          )
+        )}
       </RealmContainer>
     ));
 
