@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import SettingsRadioButton from './SettingsRadioButton';
 
 const Grid = styled.div`
-  height: 100px;
+  background-color: #464646;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-columns: repeat(auto-fit, 1fr);
   grid-column-gap: 5px;
 `;
 
@@ -19,7 +19,8 @@ const Logo = styled.div`
 `;
 
 const Category = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
 `;
 
 
@@ -31,6 +32,7 @@ class SettingsBar extends Component {
           <SettingsRadioButton
               name="bankers"
               labelText="Account View"
+              size={48}
           />
           <SettingsRadioButton
               name="bankers"
