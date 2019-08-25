@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import BankerButton from './BankerButton';
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-rows: repeat(auto-fit);
 `;
 
 const RealmContainer = styled.div`
@@ -32,12 +30,14 @@ const RealmName = styled.span`
 
 class RealmList extends Component {
   render() {
-    if (this.props.bankers.length < 1  || this.props.realms.length < 1) {
+    if (this.props.bankers.length < 1
+      || this.props.realms.length < 1
+      || this.props.disabled) {
       return null;
     }
     
     const realmList = this.props.realms.map(realm => (
-      <RealmContainer>
+      <RealmContainer key={realm}>
         <RealmName>{realm}</RealmName>
         {this.props.bankers.filter(banker => banker.realm === realm)
           .map(banker => (   
@@ -45,7 +45,6 @@ class RealmList extends Component {
             key={banker.id}
             bankerId={banker.id}
             onClick={() => this.props.selectBanker(banker.id)}
-            style={{justifySelf: 'end',}}
             />
           )
         )}
@@ -53,7 +52,7 @@ class RealmList extends Component {
     ));
 
     return (
-      <Grid>
+      <Grid className={this.props.className}>
         {realmList}
       </Grid>
     );

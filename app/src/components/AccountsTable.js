@@ -29,9 +29,11 @@ class AccountsTable extends Component {
   }
 
   render() {
-    if (this.props.bankers.length < 1  || this.props.realms.length < 1) {
+    if (this.props.bankers.length < 1  
+      || this.props.realms.length < 1
+      || this.props.disabled) {
       return null;
-    }
+    } 
 
     const accountColumns = this.props.accounts.map(accNum => (
       <AccountColumn key={accNum}>

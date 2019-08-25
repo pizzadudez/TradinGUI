@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectBanker } from '../actions/bankersActions';
 
 import styled from 'styled-components';
 
@@ -24,9 +23,9 @@ const Button = styled.button`
     0 1px 5px 0 rgba(0,0,0,0.2);
 
   background-color: ${props => props.selected ? '#ffc66d' : '#ffd561'};
-  width: ${props => props.selected ? '120px' : '80px'};
-  height: ${props => props.selected ? '48px' : '28px'};
-  font-size: ${props => props.selected ? '14.5px' : '13px'};
+  width: ${props => props.selected ? '120' : '80'}px;
+  height: ${props => props.selected ? '48' : '28'}px;
+  font-size: ${props => props.selected ? '14.5' : '13'}px;
 
   &:disabled {
     background-color: ${props => props.selected ? '#d4c7a2' : '#DFDFDF'} !important;
@@ -88,4 +87,4 @@ const mapStateToProps = (state, ownProps) => ({
   selectedIds: state.bankers.selectedIds,
 });
 
-export default connect(mapStateToProps, { selectBanker })(BankerButton);
+export default connect(mapStateToProps)(BankerButton);

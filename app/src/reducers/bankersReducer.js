@@ -8,7 +8,6 @@ import {
 const initialState = {
   bankers: [],
   realms: [],
-  accounts: [],
   selectedIds: [],
 };
 
