@@ -63,6 +63,8 @@ const _StatsCard = styled.div`
 class App extends Component {
   render() {
     return(
+      <>
+      <SettingsBar></SettingsBar>
       <GridLayout>
         {/*
         <div style={{gridArea: 'settings', background: 'red',}}></div>
@@ -74,8 +76,8 @@ class App extends Component {
           <_AccountsTable disabled={!this.props.settings.accountsTable} />
           <_RealmList disabled={this.props.settings.accountsTable} />
         </InnerGrid>
-        <_SettingsBar />
       </GridLayout>
+      </>
     );
   }
 }

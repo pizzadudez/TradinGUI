@@ -18,22 +18,25 @@ const Logo = styled.div`
   border: 1px solid black;
 `;
 
+const Category = styled.div`
+  display: flex;
+`;
+
 
 class SettingsBar extends Component {
   render() {
     return (
       <Grid className={this.props.className}>
-        <Logo />
-        <div>
+        <Category>
           <SettingsRadioButton
-            name="bankers"
-            size={62}
+              name="bankers"
+              labelText="Account View"
           />
           <SettingsRadioButton
-            name="bankers"
-            size={62}
+              name="bankers"
+              labelText="Realm View"
           />
-        </div>
+        </Category>
       </Grid>
     );
   }
