@@ -96,12 +96,13 @@ class SettingsRadioButton extends Component {
         <label>
           <Input 
             type="radio"
+            onChange={this.props.onChange}
             name={this.props.name}
+            value={this.props.value}
+            checked={this.props.checked}
             size={this.props.size}
           />
           <Radio size={this.props.size} />
-          {/*<Back size={this.props.size} />
-          <Fill size={this.props.size} />*/}
           <span>{this.props.labelText}</span>
         </label>
       </Wrapper>

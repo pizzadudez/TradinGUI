@@ -39,13 +39,17 @@ class AccountsTable extends Component {
       <AccountColumn key={accNum}>
         <ColumnHeader>{accNum}</ColumnHeader>
         {this.props.bankers.filter(banker => banker.account === accNum)
-          .map(banker => (
-            <BankerButton 
-              key={banker.id} 
-              bankerId={banker.id}
-              onClick={() => this.props.selectBanker(banker.id)}    
-            />
-          ))
+          .map(banker => {
+            if (!banker.trade_confirmation || this.props.showTraded) {
+              return (
+                <BankerButton 
+                  key={banker.id} 
+                  bankerId={banker.id}
+                  onClick={() => this.props.selectBanker(banker.id)}    
+                />
+              );
+            }
+          })
         }
       </AccountColumn>
     ));
@@ -62,6 +66,7 @@ const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
   realms: state.bankers.realms,
   accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
+  showTraded: state.settings.showTraded,
 });
 
 export default connect(

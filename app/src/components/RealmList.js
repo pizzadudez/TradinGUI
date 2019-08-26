@@ -40,13 +40,17 @@ class RealmList extends Component {
       <RealmContainer key={realm}>
         <RealmName>{realm}</RealmName>
         {this.props.bankers.filter(banker => banker.realm === realm)
-          .map(banker => (   
-            <BankerButton
-            key={banker.id}
-            bankerId={banker.id}
-            onClick={() => this.props.selectBanker(banker.id)}
-            />
-          )
+          .map(banker => {
+            if (!banker.trade_confirmation || this.props.showTraded) {
+              return (
+                <BankerButton
+                  key={banker.id}
+                  bankerId={banker.id}
+                  onClick={() => this.props.selectBanker(banker.id)}
+                />
+              );
+            }
+          }
         )}
       </RealmContainer>
     ));
@@ -62,6 +66,7 @@ class RealmList extends Component {
 const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
   realms: Object.keys(state.bankers.realms),
+  showTraded: state.settings.showTraded,
 });
 
 export default connect(mapStateToProps, { selectBanker })(RealmList);

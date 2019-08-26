@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { 
+  toggleBankersTable,
+  toggleTradedBankers,
+} from '../actions/settingsActions';
 
 import styled from 'styled-components';
 import SettingsRadioButton from './SettingsRadioButton';
@@ -26,13 +30,11 @@ const Category = styled.div`
 `;
 
 const Divider = styled.div`
-  border-left: 0.5px solid #565656; 
-  border-right: 0.5px solid #7d7d7d; 
-  height: 80%;
+  border-left: 1px solid #565656; 
+  border-right: 0.7px solid #7d7d7d; 
+  height: 100%;
   position: absolute;
-  right: 0px;
-  top: 10%;
-  margin-left: 10px;
+  right: 0;
 `;
 
 
@@ -41,16 +43,39 @@ class SettingsBar extends Component {
     return (
       <Grid className={this.props.className}>
         <Logo>
-          TradingApp
+          Trading App
         </Logo>
         <Category>
           <SettingsRadioButton
-              name="bankers"
+              onChange={() => this.props.toggleBankersTable(true)}
+              name="table"
+              value={true}
+              checked={this.props.settings.accountsTable}
               labelText="Account View"
           />
           <SettingsRadioButton
-              name="bankers"
+              onChange={() => this.props.toggleBankersTable(false)}
+              name="table"
               labelText="Realm View"
+              value={false}
+              checked={!this.props.settings.accountsTable}
+          />
+          <Divider />
+        </Category>
+        <Category>
+          <SettingsRadioButton
+              onChange={() => this.props.toggleTradedBankers(true)}
+              name="bankers"
+              value={true}
+              checked={this.props.settings.showTraded}
+              labelText="Show Traded Banks"
+          />
+          <SettingsRadioButton
+              onChange={() => this.props.toggleTradedBankers(false)}
+              name="bankers"
+              labelText="Hide"
+              value={false}
+              checked={!this.props.settings.showTraded}
           />
           <Divider />
         </Category>
@@ -63,4 +88,7 @@ const mapStateToProps = state => ({
   settings: state.settings,
 });
 
-export default connect(mapStateToProps)(SettingsBar);
+export default connect(
+  mapStateToProps, 
+  { toggleBankersTable, toggleTradedBankers }
+)(SettingsBar);
