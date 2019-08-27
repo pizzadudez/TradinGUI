@@ -11,8 +11,8 @@ import SettingsBar from './components/SettingsBar';
 const GridLayout = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-columns: 0px 350px minmax(421px, 886px) auto 0px;
-  grid-template-rows: 52px 350px auto;
+  grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
+  grid-template-rows: 52px 320px auto;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   grid-template-areas:
@@ -31,31 +31,33 @@ const InnerGrid = styled.div`
   'table';
 `;
 
-const _AccountsTable = styled(AccountsTable)`
+const AccountsTableArea = styled(AccountsTable)`
   grid-area: table;
 `;
 
-const _RealmList = styled(RealmList)`
+const RealmListArea = styled(RealmList)`
   grid-area: table;
 `;
 
-const _BankerSelection = styled(BankerSelection)`
+const BankerSelectionArea = styled(BankerSelection)`
   grid-area: selection;
 `;
 
-const _TradeList = styled(TradeList)`
+const TradeListArea = styled(TradeList)`
   grid-area: sessions;
 `;
 
-const _SettingsBar = styled(SettingsBar)`
+const SettingsBarArea = styled(SettingsBar)`
   grid-area : settings;
 `;
 
-const _StatsCard = styled.div`
+const StatsCardArea = styled.div`
   grid-area: stats;
-  background: lightgrey;
-  box-shadow: 3px 6px 6px 0 rgba(0,0,0,0.3);
+  background: #c1beb5;
   border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
+    0 3px 1px -2px rgba(0,0,0,0.12), 
+    0 1px 5px 0 rgba(0,0,0,0.2);
 `;
 
 
@@ -63,13 +65,13 @@ class App extends Component {
   render() {
     return(
       <GridLayout>
-        <_SettingsBar />
-        <_StatsCard />
-        <_TradeList />
+        <SettingsBarArea />
+        <StatsCardArea />
+        <TradeListArea />
         <InnerGrid>
-          <_BankerSelection />
-          <_AccountsTable disabled={!this.props.settings.accountsTable} />
-          <_RealmList disabled={this.props.settings.accountsTable} />
+          <BankerSelectionArea />
+          <AccountsTableArea disabled={!this.props.settings.accountsTable} />
+          <RealmListArea disabled={this.props.settings.accountsTable} />
         </InnerGrid>
       </GridLayout>
     );

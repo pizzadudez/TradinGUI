@@ -2,57 +2,46 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
+import Collapsible from './Collapsible';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: repeat(auto-fit, minmax(50px, min-content));
+  grid-template-rows: repeat(auto-fit, minmax(36px, min-content));
   grid-row-gap: 8px;
 `;
 
-const Collapsible = styled.div`
-  width: 350px;
-  border-radius: 4px;
-  background: grey;
-  overflow: hidden;
-  min-height: 50px;
-`;
-
-const Header = styled.label`
-  height: 50px;
-  width: 350px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  background: midnightblue;
-  color: white;
-`;
-
 const Content = styled.div`
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  background: white;
-  transition: max-height 1s linear;
-  color: black;
-  display: block;
+  padding: 5px 10px;
 `;
 
-const Input = styled.input`
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  &:checked {
-    & ~ ${Header} {
-      background: tomato;
-    }
-    & ~ ${Content} {
-      max-height: 100vh;
-    }
-  }
+const Info = styled.div`
+  border-bottom: 1px solid black;
+  padding: 5px 0;
 `;
 
+const List = styled.ul`
+  padding-inline-start: 20px;
+  margin-block-start: 10px;
+  margin-block-end: 5px;
+`;
 
 class TradeList extends Component {
+  infoText(session) {
+    const numBankers = session.length;
+    const timeLen = Math.round((session[numBankers-1].trade_timestamp -
+      session[0].trade_timestamp) / 1000 / 3600 * 100) / 100;
+    const totalGold = session.reduce((total, banker) =>
+      total + banker.bank_gold, 0);
+    const totalMilGold = Math.round(totalGold / 1000000 * 100) / 100
+    
+    const timeString = timeLen > 0
+      ? `in ${timeLen} hours`
+      : 'instantly'
+    return (`Total of ${numBankers} bankers traded ${timeString}
+      Total ammount of ${totalMilGold} mil gold.`
+    );
+  }
+
   render() {
     if (this.props.tradedBankers.length < 1) {
       return null;
@@ -67,30 +56,31 @@ class TradeList extends Component {
       return arr;
     }, [[]]);
 
+    const tradeSessions = tradeSessionChunks.map((session, idx) => (
+      <Collapsible
+        key={idx}
+        header={new Date(session[0].trade_timestamp).toLocaleString('de-DE')}
+        content={(
+          <Content>
+            <Info>
+              <span>{this.infoText(session)}</span>
+            </Info>
+            <List>
+              {session.map(banker => (
+                <li key={banker.id}>
+                {[Math.round(banker.bank_gold / 1000) / 1000, 'm:', 
+                  [banker.name, banker.realm].join('-')].join(' ')}
+                </li>
+              ))}
+            </List>
+          </Content>
+        )}
+      />
+    ));
+
     return (
       <Wrapper className={this.props.className}>
-        <Collapsible>
-          <Input id="123" type="checkbox" />
-          <Header htmlFor="123">
-            Text Here.
-          </Header>
-          <Content>
-            <p>Dolor sir dolores.</p>
-            <p>Dolor sir dolores.</p>
-            <p>Dolor sir dolores.</p>
-            <p>Dolor sir dolores.</p>
-            <p>Dolor sir dolores.</p>
-          </Content>
-        </Collapsible>
-        <Collapsible>
-          <Input id="1234" type="checkbox" />
-          <Header htmlFor="1234">
-            Text Here.
-          </Header>
-          <Content>
-            <p>Dolor sir dolores.</p>
-          </Content>
-        </Collapsible>
+        {tradeSessions}
       </Wrapper>
     );
   }
