@@ -12,19 +12,20 @@ const GridLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
-  grid-template-rows: 52px 320px auto;
+  grid-template-rows: 52px 320px auto auto;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   grid-template-areas:
   'settings settings settings settings settings'
   '. stats innergrid . .'
-  '. sessions innergrid . .';
+  '. sessions innergrid . .'
+  'footer footer footer footer footer';
 `;
 
 const InnerGrid = styled.div`
   grid-area: innergrid;
   display: grid;
-  grid-template-rows: minmax(116px, auto) 1fr;
+  grid-template-rows: minmax(116px, min-content) min-content;
   grid-row-gap: 10px;
   grid-template-areas:
   'selection'
@@ -60,6 +61,12 @@ const StatsCardArea = styled.div`
     0 1px 5px 0 rgba(0,0,0,0.2);
 `;
 
+const Footer = styled.div`
+  grid-area: footer;
+  height: 120px;
+  border-top: 1px solid #424242;
+  background: #252323;
+`;
 
 class App extends Component {
   render() {
@@ -73,6 +80,7 @@ class App extends Component {
           <AccountsTableArea disabled={!this.props.settings.accountsTable} />
           <RealmListArea disabled={this.props.settings.accountsTable} />
         </InnerGrid>
+        <Footer />
       </GridLayout>
     );
   }

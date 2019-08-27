@@ -24,9 +24,17 @@ const Header = styled.label`
   font-weight: 500;
   transition: all .2s ease-in-out;
   overflow: hidden;
+  position: relative;
   &:hover {
     background: #696660;
     color: #d6cc8f;
+  }
+  &::before {
+    font-family: 'Material Icons';
+    content: 'keyboard_arrow_down';
+    position: absolute;
+    right: 8px;
+    transition: transform .3s ease-in-out;
   }
 `;
 
@@ -49,6 +57,9 @@ const Input = styled.input`
       background: #b36b38;
       color: #ffedd0;
       border-bottom: 1px solid #7d7d7d;
+      &::before {
+        transform: rotate(90deg);
+      }
     }
     & ~ ${ContentContainer} {
       max-height: 50vh;
