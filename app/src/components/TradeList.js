@@ -3,9 +3,54 @@ import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 
-const StyledLi = styled.li`
-  color: #c1c1c1;
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(50px, min-content));
+  grid-row-gap: 8px;
 `;
+
+const Collapsible = styled.div`
+  width: 350px;
+  border-radius: 4px;
+  background: grey;
+  overflow: hidden;
+  min-height: 50px;
+`;
+
+const Header = styled.label`
+  height: 50px;
+  width: 350px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  background: midnightblue;
+  color: white;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background: white;
+  transition: max-height 1s linear;
+  color: black;
+  display: block;
+`;
+
+const Input = styled.input`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  &:checked {
+    & ~ ${Header} {
+      background: tomato;
+    }
+    & ~ ${Content} {
+      max-height: 100vh;
+    }
+  }
+`;
+
 
 class TradeList extends Component {
   render() {
@@ -21,27 +66,32 @@ class TradeList extends Component {
       : arr[arr.length] = [banker];
       return arr;
     }, [[]]);
-    
-    const tradeSessions = tradeSessionChunks.map((session, idx) => (
-      <div key={idx}>
-        <div style={{color: "#c1c1c1", fontSize: "18px", marginLeft: "10px",}}>
-          <strong>{new Date(session[0].trade_timestamp).toLocaleString('de-DE')}</strong>
-        </div>
-        <ol style={{marginTop: "2px",}}>
-          {session.map(banker => (
-            <StyledLi key={banker.id}>
-            {[Math.round(banker.bank_gold / 1000) / 1000, 'm:', 
-              [banker.name, banker.realm].join('-')].join(' ')}
-            </StyledLi>
-          ))}
-        </ol>
-      </div>
-    ));
 
     return (
-      <div className={this.props.className} style={{display: "flex", flexWrap: "wrap"}}>
-        {tradeSessions}
-      </div>
+      <Wrapper className={this.props.className}>
+        <Collapsible>
+          <Input id="123" type="checkbox" />
+          <Header htmlFor="123">
+            Text Here.
+          </Header>
+          <Content>
+            <p>Dolor sir dolores.</p>
+            <p>Dolor sir dolores.</p>
+            <p>Dolor sir dolores.</p>
+            <p>Dolor sir dolores.</p>
+            <p>Dolor sir dolores.</p>
+          </Content>
+        </Collapsible>
+        <Collapsible>
+          <Input id="1234" type="checkbox" />
+          <Header htmlFor="1234">
+            Text Here.
+          </Header>
+          <Content>
+            <p>Dolor sir dolores.</p>
+          </Content>
+        </Collapsible>
+      </Wrapper>
     );
   }
 }

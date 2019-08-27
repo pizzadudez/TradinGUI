@@ -12,7 +12,7 @@ const Grid = styled.div`
   background-color: #464646;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
-  grid-column-gap: 5px;
+  grid-column-gap: 20px;
   align-items: center;
 `;
 
@@ -30,8 +30,7 @@ const Category = styled.div`
 `;
 
 const Divider = styled.div`
-  border-left: 1px solid #565656; 
-  border-right: 0.7px solid #7d7d7d; 
+  border-right: 1px solid #616060; 
   height: 100%;
   position: absolute;
   right: 0;
@@ -60,7 +59,6 @@ class SettingsBar extends Component {
               value={false}
               checked={!this.props.settings.accountsTable}
           />
-          <Divider />
         </Category>
         <Category>
           <SettingsRadioButton
@@ -77,7 +75,6 @@ class SettingsBar extends Component {
               value={false}
               checked={!this.props.settings.showTraded}
           />
-          <Divider />
         </Category>
       </Grid>
     );
