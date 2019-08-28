@@ -26,7 +26,7 @@ const Radio = styled.div`
   width: ${props => (props.size ? props.size : 24)}px;
   height: ${props => (props.size ? props.size : 24)}px;
   background: #5a5a5a;
-  border-radius: 100%;
+  border-radius: ${props => props.type === 'radio' ? 100 : 0}%;
   border: 1px solid #e0dcb2;
   pointer-events: none;
   z-index: 0;
@@ -39,7 +39,7 @@ const Radio = styled.div`
     width: 49%;
     height: 49%;
     background: #dc813f;
-    border-radius: 100%;
+    border-radius: ${props => props.type === 'radio' ? 100 : 0}%;
     pointer-events: none;
     z-index: 1;
     opacity: 0;
@@ -53,7 +53,7 @@ const Radio = styled.div`
     width: calc(100% + 2px);
     height: calc(100% + 2px);
     border: 3px solid #f99c2c;
-    border-radius: 100%;
+    border-radius: ${props => props.type === 'radio' ? 100 : 0}%;
     z-index: 3;
     opacity: 0;
     transform: translate(-1px, -1px);
@@ -95,14 +95,17 @@ class SettingsRadioButton extends Component {
       <Wrapper size={this.props.size} >
         <label>
           <Input 
-            type="radio"
+            type={this.props.type}
             onChange={this.props.onChange}
-            name={this.props.name}
-            value={this.props.value}
+            name={this.props.name || ''}
+            value={this.props.value || ''}
             checked={this.props.checked}
             size={this.props.size}
           />
-          <Radio size={this.props.size} />
+          <Radio 
+            type={this.props.type}
+            size={this.props.size} 
+          />
           <span>{this.props.labelText}</span>
         </label>
       </Wrapper>

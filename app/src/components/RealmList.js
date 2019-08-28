@@ -41,7 +41,7 @@ class RealmList extends Component {
         <RealmName>{realm}</RealmName>
         {this.props.bankers.filter(banker => banker.realm === realm)
           .map(banker => {
-            if (!banker.trade_confirmation || this.props.showTraded) {
+            if (!banker.trade_confirmation || !this.props.hideTradedBankers) {
               return (
                 <BankerButton
                   key={banker.id}
@@ -66,7 +66,7 @@ class RealmList extends Component {
 const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
   realms: Object.keys(state.bankers.realms),
-  showTraded: state.settings.showTraded,
+  hideTradedBankers: state.settings.hideTradedBankers,
 });
 
 export default connect(mapStateToProps, { selectBanker })(RealmList);

@@ -12,13 +12,22 @@ const Grid = styled.div`
 `;
 
 const AccountColumn = styled.div`
-  text-align: center;
-`;
-
-const ColumnHeader = styled.div`
-  font-size: 17px;
-  color: white;
-  margin-bottom: 3px;
+  display: grid;
+  align-content: flex-start;
+  &::before {
+    content: '${props => props.accNum}';
+    font-size: 17px;
+    color: white;
+    margin-left: 5px;
+    margin-bottom: 3px;
+  }
+  &::before {
+    content: '${props => props.accNum}';
+    font-size: 1.2em;
+    color: white;
+    margin-left: 1px;
+    margin-bottom: 3px;
+  }
 `;
 
 class AccountsTable extends Component {
@@ -36,11 +45,10 @@ class AccountsTable extends Component {
     } 
 
     const accountColumns = this.props.accounts.map(accNum => (
-      <AccountColumn key={accNum}>
-        <ColumnHeader>{accNum}</ColumnHeader>
+      <AccountColumn key={accNum} accNum={accNum}>
         {this.props.bankers.filter(banker => banker.account === accNum)
           .map(banker => {
-            if (!banker.trade_confirmation || this.props.showTraded) {
+            if (!banker.trade_confirmation || !this.props.hideTradedBankers) {
               return (
                 <BankerButton 
                   key={banker.id} 
@@ -66,7 +74,7 @@ const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
   realms: state.bankers.realms,
   accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
-  showTraded: state.settings.showTraded,
+  hideTradedBankers: state.settings.hideTradedBankers,
 });
 
 export default connect(

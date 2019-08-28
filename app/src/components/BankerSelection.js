@@ -8,21 +8,33 @@ import BankerButton from './BankerButton';
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, 120px);
-  grid-column-gap: 5px;
+  grid-column-gap: 4px;
+  &::before {
+    content: 'Selected bankers will appear here...';
+    position: absolute;
+    color: #7b7b7b;
+    font-weight: 550;
+    font-size: 1.5em;
+    white-space: nowrap;
+    opacity: ${props => props.placeHolderText};
+  }
 `;
 
 class BankerSelection extends Component {
   render() {
     const selectedBankers = this.props.selectedBankers.map(banker => (
       <BankerButton 
-        selected
+        selection
         key={banker.id}
         bankerId={banker.id}
         onClick={() => this.props.updateBanker(banker, Date.now())}
       />
     ));
     return (
-      <Grid className={this.props.className}>
+      <Grid 
+        className={this.props.className}
+        placeHolderText={this.props.selectedBankers.length ? 0 : 1}
+      >
         {selectedBankers}
       </Grid>
     );

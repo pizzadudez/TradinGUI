@@ -3,79 +3,82 @@ import { connect } from 'react-redux';
 import { 
   toggleBankersTable,
   toggleTradedBankers,
+  toggleTradedTooltips,
 } from '../actions/settingsActions';
 
 import styled from 'styled-components';
-import SettingsRadioButton from './SettingsRadioButton';
+import SettingsButton from './SettingsButton';
 
 const Grid = styled.div`
   background-color: #464646;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
-  grid-column-gap: 20px;
+  grid-template-columns: 216px repeat(auto-fit, minmax(2px, min-content));
+  grid-column-gap: 10px;
   align-items: center;
 `;
 
 const Logo = styled.div`
   color: white;
-  font-size: 26px;
-  display: grid;
-  place-items: center;
-  padding: 0 12px 0 8px;
-`;
-
-const Category = styled.div`
-  display: flex;
+  font-size: 2.4em;
+  font-weight: 650;
+  padding: 0 12px 5px 8px;
+  white-space: nowrap;
   position: relative;
+  margin-left: 25px;
+  &::before {
+    font-family: 'Material Icons';
+    content: 'compare_arrows';
+    position: absolute;
+    font-size: 2.06rem;
+    top: 5px;
+    left: -12px;
+  }
 `;
 
 const Divider = styled.div`
   border-right: 1px solid #616060; 
-  height: 100%;
-  position: absolute;
-  right: 0;
+  height: 70%;
+  align-self: center;
 `;
-
 
 class SettingsBar extends Component {
   render() {
     return (
       <Grid className={this.props.className}>
         <Logo>
-          Trading App
+          TradinGUI
         </Logo>
-        <Category>
-          <SettingsRadioButton
-              onChange={() => this.props.toggleBankersTable(true)}
-              name="table"
-              value={true}
-              checked={this.props.settings.accountsTable}
-              labelText="Account View"
-          />
-          <SettingsRadioButton
-              onChange={() => this.props.toggleBankersTable(false)}
-              name="table"
-              labelText="Realm View"
-              value={false}
-              checked={!this.props.settings.accountsTable}
-          />
-        </Category>
-        <Category>
-          <SettingsRadioButton
-              onChange={() => this.props.toggleTradedBankers(true)}
-              name="bankers"
-              value={true}
-              checked={this.props.settings.showTraded}
-              labelText="Show Traded Banks"
-          />
-          <SettingsRadioButton
-              onChange={() => this.props.toggleTradedBankers(false)}
-              name="bankers"
-              labelText="Hide"
-              value={false}
-              checked={!this.props.settings.showTraded}
-          />
-        </Category>
+        <Divider />
+        <SettingsButton
+          type="radio"
+          onChange={() => this.props.toggleBankersTable(true)}
+          name="table"
+          value={true}
+          checked={this.props.settings.accountsTable}
+          labelText="Account View"
+        />
+        <SettingsButton
+          type="radio"
+          onChange={() => this.props.toggleBankersTable(false)}
+          name="table"
+          labelText="Realm View"
+          value={false}
+          checked={!this.props.settings.accountsTable}
+        />
+        <Divider />
+        <SettingsButton
+          type="checkbox"
+          onChange={() => this.props.toggleTradedBankers(!this.props.settings.hideTradedBankers)}
+          labelText="Hide Traded Banks"
+          checked={this.props.settings.hideTradedBankers}
+        />
+        <Divider />
+        <SettingsButton
+          type="checkbox"
+          onChange={() => this.props.toggleTradedTooltips(!this.props.settings.showTradedTooltips)}
+          labelText="Show Traded Tooltips"
+          checked={this.props.settings.showTradedTooltips}
+        />
       </Grid>
     );
   }
@@ -87,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps, 
-  { toggleBankersTable, toggleTradedBankers }
+  { toggleBankersTable, toggleTradedBankers, toggleTradedTooltips }
 )(SettingsBar);

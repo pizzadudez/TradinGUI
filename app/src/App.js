@@ -7,14 +7,15 @@ import RealmList from './components/RealmList';
 import BankerSelection from './components/BankerSelection';
 import TradeList from './components/TradeList';
 import SettingsBar from './components/SettingsBar';
+import StatsCard from './components/StatsCard';
 
 const GridLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
   grid-template-rows: 52px 320px auto auto;
-  grid-row-gap: 10px;
-  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
   grid-template-areas:
   'settings settings settings settings settings'
   '. stats innergrid . .'
@@ -25,7 +26,7 @@ const GridLayout = styled.div`
 const InnerGrid = styled.div`
   grid-area: innergrid;
   display: grid;
-  grid-template-rows: minmax(116px, min-content) min-content;
+  grid-template-rows: minmax(53px, min-content) min-content;
   grid-row-gap: 10px;
   grid-template-areas:
   'selection'
@@ -52,13 +53,8 @@ const SettingsBarArea = styled(SettingsBar)`
   grid-area : settings;
 `;
 
-const StatsCardArea = styled.div`
+const StatsCardArea = styled(StatsCard)`
   grid-area: stats;
-  background: #c1beb5;
-  border-radius: 4px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-    0 3px 1px -2px rgba(0,0,0,0.12), 
-    0 1px 5px 0 rgba(0,0,0,0.2);
 `;
 
 const Footer = styled.div`
