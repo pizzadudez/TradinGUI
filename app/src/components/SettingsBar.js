@@ -14,7 +14,7 @@ import Button from './Button';
 const Grid = styled.div`
   background-color: #464646;
   display: grid;
-  grid-template-columns: 216px repeat(auto-fit, minmax(2px, min-content));
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 1px));
   grid-column-gap: 10px;
   align-items: center;
 `;
@@ -24,7 +24,6 @@ const Logo = styled.div`
   font-size: 2.4em;
   font-weight: 650;
   padding: 0 12px 5px 8px;
-  white-space: nowrap;
   position: relative;
   margin-left: 25px;
   &::before {
@@ -34,6 +33,12 @@ const Logo = styled.div`
     font-size: 2.06rem;
     top: 5px;
     left: -12px;
+  }
+  p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    white-space: nowrap;
+    overflow: hidden;
   }
 `;
 
@@ -48,7 +53,7 @@ class SettingsBar extends Component {
     return (
       <Grid className={this.props.className}>
         <Logo>
-          TradinGUI
+          <p>TradinGUI</p>
         </Logo>
         <Divider />
         <SettingsButton

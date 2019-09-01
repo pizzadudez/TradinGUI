@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: relative;
   margin: 5px;
 
   label {
-    white-space: nowrap;
+    display: flex;
+    position: relative;
     font-size: 1em;
     color: #b5b197;
-    margin-left: ${props => (props.size ? props.size + 5 : 29)}px;
+    
     line-height: ${props => (props.size ? props.size : 24)}px;
 
-    input:checked ~ span {
+    input:checked ~ p {
       color: #ffc580;
       transition: color 0.1s ease-in;
     }
@@ -23,6 +23,7 @@ const Wrapper = styled.div`
 const Radio = styled.div`
   cursor: pointer;
   position: absolute;
+  left: 0;
   width: ${props => (props.size ? props.size : 24)}px;
   height: ${props => (props.size ? props.size : 24)}px;
   background: #5a5a5a;
@@ -89,6 +90,16 @@ const Input = styled.input`
   }
 `;
 
+const Text = styled.p`
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-left: ${props => (props.size ? props.size + 5 : 29)}px;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+`;
+
 class SettingsRadioButton extends Component {
   render() {
     return (
@@ -106,7 +117,7 @@ class SettingsRadioButton extends Component {
             type={this.props.type}
             size={this.props.size} 
           />
-          <span>{this.props.labelText}</span>
+          <Text size={this.props.size}>{this.props.labelText}</Text>
         </label>
       </Wrapper>
     );
