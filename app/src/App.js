@@ -13,7 +13,7 @@ const GridLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
-  grid-template-rows: 52px 320px auto auto;
+  grid-template-rows: 56px 320px auto auto;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
   grid-template-areas:

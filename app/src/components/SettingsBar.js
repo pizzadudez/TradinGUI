@@ -5,9 +5,11 @@ import {
   toggleTradedBankers,
   toggleTradedTooltips,
 } from '../actions/settingsActions';
+import { clearSelection } from '../actions/bankersActions';
 
 import styled from 'styled-components';
 import SettingsButton from './SettingsButton';
+import Button from './Button';
 
 const Grid = styled.div`
   background-color: #464646;
@@ -79,6 +81,12 @@ class SettingsBar extends Component {
           labelText="Show Traded Tooltips"
           checked={this.props.settings.showTradedTooltips}
         />
+        <Divider />
+        <Button 
+          onClick={() => this.props.clearSelection()}
+          text='Clear Selection'
+          disabled={!this.props.selectionExists}
+        />
       </Grid>
     );
   }
@@ -86,9 +94,14 @@ class SettingsBar extends Component {
 
 const mapStateToProps = state => ({
   settings: state.settings,
+  selectionExists: state.bankers.selectedIds.length > 0 ? true : false,
 });
 
 export default connect(
   mapStateToProps, 
-  { toggleBankersTable, toggleTradedBankers, toggleTradedTooltips }
+  { toggleBankersTable, 
+    toggleTradedBankers, 
+    toggleTradedTooltips, 
+    clearSelection,
+  }
 )(SettingsBar);

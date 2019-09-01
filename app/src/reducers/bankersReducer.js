@@ -3,6 +3,7 @@ import {
   FETCH_REALMS,
   SELECT_BANKER,
   UPDATE_BANKER,
+  CLEAR_SELECTION,
 } from '../actions/types';
 
 const initialState = {
@@ -37,6 +38,12 @@ export default function(state = initialState, action) {
           ? {...banker, trade_timestamp: action.timestamp, trade_confirmation: 1}
           : banker
         ),
+      }
+    }
+    case CLEAR_SELECTION: {
+      return {
+        ...state,
+        selectedIds: [],
       }
     }
     default:

@@ -3,12 +3,18 @@ import {
   FETCH_REALMS,
   SELECT_BANKER,
   UPDATE_BANKER,
+  CLEAR_SELECTION
 } from './types';
 
 import axios from 'axios';
 
+// api urls
+const localhost = 'http://127.0.0.1:8000'
+const pythonanywhere = 'https://vladalbert.pythonanywhere.com'
+const api = localhost
+
 export const fetchBankers = () => dispatch => {
-  axios.get('http://127.0.0.1:8000/bankers/?format=json')
+  axios.get(api + '/bankers/?format=json')
   .then(bankers => dispatch({
     type: FETCH_BANKERS,
     payload: bankers.data,  
@@ -16,7 +22,7 @@ export const fetchBankers = () => dispatch => {
 };
 
 export const fetchRealms = () => dispatch => {
-  axios.get('http://127.0.0.1:8000/realms/?format=json')
+  axios.get(api + '/realms/?format=json')
   .then(res => {
     const realms = res.data.reduce((obj, item) => ({
       ...obj, [item.realm]: {
@@ -40,7 +46,7 @@ export const selectBanker = id => dispatch => {
 };
 
 export const updateBanker = (banker, timestamp) => dispatch => {
-  axios.put('http://127.0.0.1:8000/bankers/' + banker.id + '/',
+  axios.put(api + '/bankers/' + banker.id + '/',
     {...banker, trade_timestamp: timestamp, trade_confirmation: 1}
   );
   dispatch({
@@ -49,3 +55,9 @@ export const updateBanker = (banker, timestamp) => dispatch => {
     timestamp: timestamp,
   });
 };
+
+export const clearSelection = () => dispatch => {
+  dispatch({
+    type: CLEAR_SELECTION,
+  });
+}
