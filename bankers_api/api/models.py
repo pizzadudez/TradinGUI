@@ -8,8 +8,8 @@ class Banker(models.Model):
     account = models.IntegerField()
     bank_num = models.IntegerField()
     bank_gold = models.IntegerField()
-    trade_timestamp = models.IntegerField()
-    trade_confirmation = models.IntegerField()
+    trade_timestamp = models.IntegerField(blank=True, null=True)
+    trade_confirmation = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return '-'.join((self.realm, str(self.bank_num)))
