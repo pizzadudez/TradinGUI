@@ -4,6 +4,7 @@ import {
   toggleBankersTable,
   toggleTradedBankers,
   toggleTradedTooltips,
+  toggleTradedOperations,
 } from '../actions/settingsActions';
 import { clearSelection } from '../actions/bankersActions';
 
@@ -79,12 +80,17 @@ class SettingsBar extends Component {
           labelText="Hide Traded Banks"
           checked={this.props.settings.hideTradedBankers}
         />
-        <Divider />
         <SettingsButton
           type="checkbox"
           onChange={() => this.props.toggleTradedTooltips(!this.props.settings.showTradedTooltips)}
           labelText="Show Traded Tooltips"
           checked={this.props.settings.showTradedTooltips}
+        />
+        <SettingsButton
+          type="checkbox"
+          onChange={() => this.props.toggleTradedOperations(!this.props.settings.showTradedOperations)}
+          labelText="Show Trade List Operations"
+          checked={this.props.settings.showTradedOperations}
         />
         <Divider />
         <Button 
@@ -107,6 +113,7 @@ export default connect(
   { toggleBankersTable, 
     toggleTradedBankers, 
     toggleTradedTooltips, 
+    toggleTradedOperations,
     clearSelection,
   }
 )(SettingsBar);

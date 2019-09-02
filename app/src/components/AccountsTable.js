@@ -16,15 +16,8 @@ const AccountColumn = styled.div`
   align-content: flex-start;
   &::before {
     content: '${props => props.accNum}';
-    font-size: 17px;
-    color: white;
-    margin-left: 5px;
-    margin-bottom: 3px;
-  }
-  &::before {
-    content: '${props => props.accNum}';
     font-size: 1.2em;
-    color: white;
+    color: #e0ded6;
     margin-left: 1px;
     margin-bottom: 3px;
   }
@@ -46,18 +39,16 @@ class AccountsTable extends Component {
 
     const accountColumns = this.props.accounts.map(accNum => (
       <AccountColumn key={accNum} accNum={accNum}>
-        {this.props.bankers.filter(banker => banker.account === accNum)
-          .map(banker => {
-            if (!banker.trade_confirmation || !this.props.hideTradedBankers) {
-              return (
-                <BankerButton 
-                  key={banker.id} 
-                  bankerId={banker.id}
-                  onClick={() => this.props.selectBanker(banker.id)}    
-                />
-              );
-            }
-          })
+        {this.props.bankers.filter(banker => 
+          banker.account === accNum 
+          && (!banker.trade_confirmation || !this.props.hideTradedBankers
+          )).map(banker => (
+            <BankerButton 
+              key={banker.id} 
+              bankerId={banker.id}
+              onClick={() => this.props.selectBanker(banker.id)}    
+            />
+          ))
         }
       </AccountColumn>
     ));

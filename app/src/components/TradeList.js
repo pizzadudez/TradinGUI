@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import Collapsible from './Collapsible';
+import TradeListOperations from './TradeListOperations';
 
 const Wrapper = styled.div`
   display: grid;
@@ -80,6 +81,12 @@ class TradeList extends Component {
 
     return (
       <Wrapper className={this.props.className}>
+        {this.props.showTradedOperations 
+          ? <TradeListOperations 
+              latestSessionBankers={tradeSessionChunks[tradeSessionChunks.length-1]} 
+              allTradedBankers={this.props.tradedBankers}
+            /> 
+          : null} 
         {tradeSessions}
       </Wrapper>
     );
@@ -90,6 +97,7 @@ const mapStateToProps = state => ({
   tradedBankers: state.bankers.bankers.filter(banker =>
     banker.trade_timestamp !== null
     ).sort((a, b) => a.trade_timestamp - b.trade_timestamp),
+  showTradedOperations: state.settings.showTradedOperations,
 });
 
 export default connect(mapStateToProps)(TradeList);

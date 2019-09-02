@@ -3,7 +3,8 @@ import {
   FETCH_REALMS,
   SELECT_BANKER,
   UPDATE_BANKER,
-  CLEAR_SELECTION
+  CLEAR_SELECTION,
+  WIPE_TRADE,
 } from './types';
 
 import axios from 'axios';
@@ -59,5 +60,19 @@ export const updateBanker = (banker, timestamp) => dispatch => {
 export const clearSelection = () => dispatch => {
   dispatch({
     type: CLEAR_SELECTION,
+  });
+}
+
+export const wipeTrade = (bankers, localOnly=true) => dispatch => {
+  if (!localOnly) {
+    bankers.forEach(banker => {
+     axios.put(api + '/bankers/' + banker.id + '/',
+     {...banker, trade_timestamp: null, trade_confirmation: null}
+     ); 
+    })
+  }
+  dispatch({
+    type: WIPE_TRADE,
+    bankerIds: bankers.map(banker => banker.id),
   });
 }

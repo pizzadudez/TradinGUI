@@ -2,12 +2,14 @@ import {
   TOGGLE_BANKERS_TABLE,
   TOGGLE_TRADED_BANKERS,
   TOGGLE_TRADED_TOOLTIPS,
+  TOGGLE_TRADED_OPERATIONS,
 } from '../actions/types'
 
 const initialState = {
   accountsTable: true,
   hideTradedBankers: false,
   showTradedTooltips: false,
+  showTradedOperations: false,
 }
 
 export default function(state=initialState, action) {
@@ -26,6 +28,11 @@ export default function(state=initialState, action) {
       return {
         ...state,
         showTradedTooltips: action.showTradedTooltips,
+      }
+    case TOGGLE_TRADED_OPERATIONS:
+      return {
+        ...state,
+        showTradedOperations: action.showTradedOperations,
       }
     default:
       return state;

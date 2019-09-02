@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
 const Button = styled.button`
+  width: max-content;
   border: none;
   border-radius: 3px;
-  padding: 1px 4px;
+  padding: 1px 8px;
   overflow: hidden;
   cursor: pointer;
   white-space: nowrap;
@@ -15,7 +16,7 @@ const Button = styled.button`
     0 3px 1px -2px rgba(0,0,0,0.12),
     0 1px 5px 0 rgba(0,0,0,0.2);
   font-size: 16px;
-  font-weight: 540;
+  font-weight: 550;
   height: 40px;
   background: #ffba66;
   color: #5d4500;
@@ -41,8 +42,6 @@ const Button = styled.button`
 `;
 
 export default function (props) {
-
-
   return (
     <Button
       onClick={props.onClick}

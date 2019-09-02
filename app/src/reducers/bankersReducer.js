@@ -4,6 +4,7 @@ import {
   SELECT_BANKER,
   UPDATE_BANKER,
   CLEAR_SELECTION,
+  WIPE_TRADE,
 } from '../actions/types';
 
 const initialState = {
@@ -44,6 +45,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         selectedIds: [],
+      }
+    }
+    case WIPE_TRADE: {
+      return {
+        ...state,
+        bankers: state.bankers.map(banker => 
+          action.bankerIds.includes(banker.id)
+          ? {...banker, trade_timestamp: null, trade_confirmation: null}
+          : banker
+        )
       }
     }
     default:

@@ -2,6 +2,7 @@ import {
   TOGGLE_BANKERS_TABLE,
   TOGGLE_TRADED_BANKERS,
   TOGGLE_TRADED_TOOLTIPS,
+  TOGGLE_TRADED_OPERATIONS,
 } from './types';
 
 export const toggleBankersTable = toggle => dispatch => {
@@ -23,4 +24,11 @@ export const toggleTradedTooltips = toggle => dispatch => {
     type: TOGGLE_TRADED_TOOLTIPS,
     showTradedTooltips: toggle,
   });
+};
+
+export const toggleTradedOperations = toggle => dispatch => {
+  dispatch({
+    type: TOGGLE_TRADED_OPERATIONS,
+    showTradedOperations: toggle,
+  })
 };

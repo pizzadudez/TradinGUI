@@ -20,7 +20,7 @@ const RealmContainer = styled.div`
 const RealmName = styled.span`
   width: 100%;
   display: block;
-  color: white;
+  color: #e0ded6;
   font-size: 17px;
   justify-self: start;
   overflow: hidden;
@@ -39,19 +39,17 @@ class RealmList extends Component {
     const realmList = this.props.realms.map(realm => (
       <RealmContainer key={realm}>
         <RealmName>{realm}</RealmName>
-        {this.props.bankers.filter(banker => banker.realm === realm)
-          .map(banker => {
-            if (!banker.trade_confirmation || !this.props.hideTradedBankers) {
-              return (
-                <BankerButton
-                  key={banker.id}
-                  bankerId={banker.id}
-                  onClick={() => this.props.selectBanker(banker.id)}
-                />
-              );
-            }
-          }
-        )}
+        {this.props.bankers.filter(banker => 
+          banker.realm === realm 
+          && (!banker.trade_confirmation || !this.props.hideTradedBankers
+          )).map(banker => (
+            <BankerButton 
+              key={banker.id} 
+              bankerId={banker.id}
+              onClick={() => this.props.selectBanker(banker.id)}    
+            />
+          ))
+        }
       </RealmContainer>
     ));
 
