@@ -3,6 +3,7 @@ import {
   TOGGLE_TRADED_BANKERS,
   TOGGLE_TRADED_TOOLTIPS,
   TOGGLE_TRADED_OPERATIONS,
+  TOGGLE_REALM_STATS,
 } from '../actions/types'
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   hideTradedBankers: false,
   showTradedTooltips: false,
   showTradedOperations: false,
+  showRealmStats: false,
 }
 
 export default function(state=initialState, action) {
@@ -33,6 +35,11 @@ export default function(state=initialState, action) {
       return {
         ...state,
         showTradedOperations: action.showTradedOperations,
+      }
+    case TOGGLE_REALM_STATS:
+      return {
+        ...state,
+        showRealmStats: action.showRealmStats,
       }
     default:
       return state;

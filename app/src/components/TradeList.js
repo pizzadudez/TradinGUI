@@ -9,6 +9,12 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, minmax(36px, min-content));
   grid-row-gap: 8px;
+  &::before {
+    content: 'Trading Sessions';
+    color: #e0dcb2;
+    font-weight: 550;
+    font-size: 1.5em;
+  }
 `;
 
 const Content = styled.div`
@@ -33,16 +39,22 @@ class TradeList extends Component {
       session[0].trade_timestamp) / 1000 / 3600 * 100) / 100;
     const totalGold = session.reduce((total, banker) =>
       total + banker.bank_gold, 0);
-    const totalMilGold = Math.round(totalGold / 1000000 * 100) / 100
+    const totalMilGold = Math.round(totalGold / 1000000 * 100) / 100;
     
     const timeString = timeLen > 0
       ? `in ${timeLen} hours`
-      : 'instantly'
+      : 'instantly';
+
     return (`Total of ${numBankers} bankers traded ${timeString}
       Total ammount of ${totalMilGold} mil gold.`
     );
   }
-
+  headerText(session) {
+    const datetime = new Date(session[0].trade_timestamp);
+    const date = datetime.toLocaleDateString('en-GB');
+    const time = datetime.toLocaleTimeString('en-GB');
+    return (`${date} - ${time}`);
+  }
   render() {
     if (this.props.tradedBankers.length < 1) {
       return null;
@@ -60,7 +72,7 @@ class TradeList extends Component {
     const tradeSessions = tradeSessionChunks.map((session, idx) => (
       <Collapsible
         key={idx}
-        header={new Date(session[0].trade_timestamp).toLocaleString('de-DE')}
+        header={this.headerText(session)}
         content={(
           <Content>
             <Info>

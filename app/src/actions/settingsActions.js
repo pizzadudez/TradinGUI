@@ -3,6 +3,7 @@ import {
   TOGGLE_TRADED_BANKERS,
   TOGGLE_TRADED_TOOLTIPS,
   TOGGLE_TRADED_OPERATIONS,
+  TOGGLE_REALM_STATS,
 } from './types';
 
 export const toggleBankersTable = toggle => dispatch => {
@@ -31,4 +32,11 @@ export const toggleTradedOperations = toggle => dispatch => {
     type: TOGGLE_TRADED_OPERATIONS,
     showTradedOperations: toggle,
   })
+};
+
+export const toggleRealmStats = toggle => dispatch => {
+  dispatch({
+    type: TOGGLE_REALM_STATS,
+    showRealmStats: toggle,
+  });
 };
