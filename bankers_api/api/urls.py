@@ -12,6 +12,8 @@ urlpatterns = [
     path('bankers/', views.BankerList.as_view()),
     path('bankers/<int:pk>/', views.BankerDetail.as_view()),
     path('realms/', views.RealmList.as_view()),
+    path('restore_default/', views.restore_default_data),
+    path('set_default/', views.set_default_data),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

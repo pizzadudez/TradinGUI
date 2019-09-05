@@ -19,6 +19,24 @@ class Banker(models.Model):
         db_table = 'bankers'
 
 
+class DefaultBanker(models.Model):
+    id = models.IntegerField(primary_key=True) ## should be AutoField??
+    name = models.TextField()
+    realm = models.TextField()
+    account = models.IntegerField()
+    bank_num = models.IntegerField()
+    bank_gold = models.IntegerField()
+    trade_timestamp = models.IntegerField(blank=True, null=True)
+    trade_confirmation = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return '-'.join((self.realm, str(self.bank_num)))
+
+    class Meta:
+        managed = False
+        db_table = 'bankers_default'
+
+
 class Realm(models.Model):
     id = models.IntegerField(primary_key=True)
     realm = models.TextField()

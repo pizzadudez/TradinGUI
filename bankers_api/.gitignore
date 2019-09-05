@@ -10,3 +10,5 @@ db.sqlite3
 
 ### CUSTOM ###
 /external_dbs
+/api/__pycache__
+/api/migrations
