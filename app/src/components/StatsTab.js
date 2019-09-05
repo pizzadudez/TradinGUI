@@ -21,6 +21,17 @@ const Label = styled.label`
   display: grid;
   place-content: center;
   background: #adaaa2;
+  color: #524a3a;
+  font-size: 1.3em;
+  font-weight: 500;
+  transition: all .25s ease-in-out;
+  z-index: 1;
+  ${props => props.shadow
+    ? props.shadow === 'left'
+      ? 'box-shadow: 1px -6px 5px 0 rgba(0,0,0,0.14);'
+      : 'box-shadow: -1px -6px 5px 0 rgba(0,0,0,0.14);'
+    : 'box-shadow: none;'
+  }
 `;
 
 const Input = styled.input`
@@ -31,6 +42,8 @@ const Input = styled.input`
   &:checked {
     & ~ ${Label} {
       background: #c1beb5;
+      color: #3a3a3a;
+      z-index: 3;
     }
   }
 `;
@@ -45,8 +58,9 @@ export default function StatsTab(props) {
         value={props.value}
         checked={props.checked}
         id={props.text}
+        
       />
-      <Label htmlFor={props.text}>
+      <Label htmlFor={props.text} shadow={props.shadow || ''}>
         <Text>{props.text}</Text>
       </Label>
     </Wrapper>

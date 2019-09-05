@@ -13,14 +13,14 @@ const RealmContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(80px, max-content));
   grid-column-gap: 3px;
   justify-items: end;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #46443f;
   margin-bottom: 5px;
 `;
 
 const RealmName = styled.span`
   width: 100%;
   display: block;
-  color: #e0ded6;
+  color: #b3b093;
   font-size: 17px;
   justify-self: start;
   overflow: hidden;

@@ -42,8 +42,8 @@ class TradeList extends Component {
     const totalMilGold = Math.round(totalGold / 1000000 * 100) / 100;
     
     const timeString = timeLen > 0
-      ? `in ${timeLen} hours`
-      : 'instantly';
+      ? `in ${timeLen} hours.`
+      : 'instantly.';
 
     return (`Total of ${numBankers} bankers traded ${timeString}
       Total ammount of ${totalMilGold} mil gold.`

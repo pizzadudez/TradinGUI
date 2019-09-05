@@ -12,7 +12,7 @@ import StatsCard from './components/StatsCard';
 const GridLayout = styled.div`
   display: grid;
   grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
-  grid-template-rows: auto 320px auto auto;
+  grid-template-rows: auto 330px auto auto;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
   grid-template-areas:

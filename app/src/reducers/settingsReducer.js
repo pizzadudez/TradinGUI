@@ -5,6 +5,7 @@ import {
   TOGGLE_TRADED_OPERATIONS,
   TOGGLE_REALM_STATS,
   SELECT_STATS_REALM,
+  SELECT_STATS_CURRENCY,
 } from '../actions/types'
 
 const initialState = {
@@ -14,6 +15,24 @@ const initialState = {
   showTradedOperations: false,
   showRealmStats: false,
   statsRealm: 'Ragnaros',
+  statsCurrency: 'USD',
+  currencies: {
+    'USD': {
+      code: 'USD',
+      symbol: '$',
+      exchangeRate: 1,
+    },
+    'EUR': {
+      code: 'EUR',
+      symbol: '€',
+      exchangeRate: 0.8980,
+    },
+    'GBP': {
+      code: 'GBP',
+      symbol: '£',
+      exchangeRate: 0.8234,
+    }
+  },
 }
 
 export default function(state=initialState, action) {
@@ -47,6 +66,11 @@ export default function(state=initialState, action) {
       return {
         ...state,
         statsRealm: action.statsRealm,
+      }
+    case SELECT_STATS_CURRENCY:
+      return {
+        ...state,
+        statsCurrency: action.statsCurrency,
       }
     default:
       return state;

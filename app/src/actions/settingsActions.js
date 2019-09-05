@@ -5,6 +5,7 @@ import {
   TOGGLE_TRADED_OPERATIONS,
   TOGGLE_REALM_STATS,
   SELECT_STATS_REALM,
+  SELECT_STATS_CURRENCY,
 } from './types';
 
 export const toggleBankersTable = toggle => dispatch => {
@@ -46,5 +47,12 @@ export const selectStatsRealm = realm => dispatch => {
   dispatch({
     type: SELECT_STATS_REALM,
     statsRealm: realm,
+  });
+};
+
+export const selectStatsCurrency = currency => dispatch => {
+  dispatch({
+    type: SELECT_STATS_CURRENCY,
+    statsCurrency: currency,
   });
 };
