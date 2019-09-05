@@ -4,6 +4,7 @@ import {
   TOGGLE_TRADED_TOOLTIPS,
   TOGGLE_TRADED_OPERATIONS,
   TOGGLE_REALM_STATS,
+  SELECT_STATS_REALM,
 } from '../actions/types'
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   showTradedTooltips: false,
   showTradedOperations: false,
   showRealmStats: false,
+  statsRealm: 'Ragnaros',
 }
 
 export default function(state=initialState, action) {
@@ -40,6 +42,11 @@ export default function(state=initialState, action) {
       return {
         ...state,
         showRealmStats: action.showRealmStats,
+      }
+    case SELECT_STATS_REALM:
+      return {
+        ...state,
+        statsRealm: action.statsRealm,
       }
     default:
       return state;
