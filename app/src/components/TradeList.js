@@ -34,6 +34,7 @@ const List = styled.ul`
 
 class TradeList extends Component {
   infoText(session) {
+    if (!session[0]) return;
     const numBankers = session.length;
     const timeLen = Math.round((session[numBankers-1].trade_timestamp -
       session[0].trade_timestamp) / 1000 / 3600 * 100) / 100;
@@ -50,17 +51,18 @@ class TradeList extends Component {
     );
   }
   headerText(session) {
+    if (!session[0]) return;
     const datetime = new Date(session[0].trade_timestamp);
     const date = datetime.toLocaleDateString('en-GB');
     const time = datetime.toLocaleTimeString('en-GB');
     return (`${date} - ${time}`);
   }
   render() {
-    if (this.props.tradedBankers.length < 1) {
+    if (this.props.bankers.length < 1) {
       return null;
     }
 
-    const tradeSessionChunks = this.props.tradedBankers.reduce((arr, banker) => {
+    let tradeSessionChunks = this.props.tradedBankers.reduce((arr, banker) => {
       let lastSession = arr[arr.length-1];
       let lastBanker = lastSession[lastSession.length-1] || banker;
       (banker.trade_timestamp - lastBanker.trade_timestamp)/1000 < 8 * 3600
@@ -68,6 +70,10 @@ class TradeList extends Component {
       : arr[arr.length] = [banker];
       return arr;
     }, [[]]);
+    // empty list if nothing has been traded
+    if (tradeSessionChunks[0].length < 1) {
+      tradeSessionChunks = [];
+    }
 
     const tradeSessions = tradeSessionChunks.map((session, idx) => (
       <Collapsible
@@ -106,6 +112,7 @@ class TradeList extends Component {
 }
 
 const mapStateToProps = state => ({
+  bankers: state.bankers.bankers,
   tradedBankers: state.bankers.bankers.filter(banker =>
     banker.trade_timestamp !== null
     ).sort((a, b) => a.trade_timestamp - b.trade_timestamp),

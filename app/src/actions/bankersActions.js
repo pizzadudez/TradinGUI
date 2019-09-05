@@ -12,7 +12,7 @@ import axios from 'axios';
 // api urls
 const localhost = 'http://127.0.0.1:8000'
 const pythonanywhere = 'https://vladalbert.pythonanywhere.com'
-const api = localhost
+const api = pythonanywhere
 
 export const fetchBankers = () => dispatch => {
   axios.get(api + '/bankers/?format=json')
@@ -75,4 +75,13 @@ export const wipeTrade = (bankers, localOnly=true) => dispatch => {
     type: WIPE_TRADE,
     bankerIds: bankers.map(banker => banker.id),
   });
+}
+
+export const restoreDefaultDB = confirmation => dispatch => {
+  if (confirmation) {
+    axios.get(api + '/restore_default/');
+    console.log('Database restoration request sent.')
+  } else {
+    console.log('No confirmation.')
+  }
 }

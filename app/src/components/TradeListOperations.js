@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { wipeTrade } from '../actions/bankersActions';
+import { wipeTrade, restoreDefaultDB } from '../actions/bankersActions';
 
 import styled from 'styled-components';
 import Button from './Button';
@@ -32,21 +32,26 @@ const WarningSection = styled.div`
     margin-top: 3px;
     color: #ff6c6c;
   }
-  > p {
+  >p {
     color: #ef5e5e;
     white-space: pre-line;
-    margin-block-start: 12px;
+    margin-block-start: 22px;
     margin-block-end: 12px;
   }
-  > div {
+  >div {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap
   }
-  >div>label>div {
+  >div>label>div, >div>div>label>div {
     border-color: #ef5e5e;
   }
-  >div>label>p {
+  >div>label>p, >div>div>label>p {
     color: #ef5e5e;
+    font-weight: 700;
+  }
+  >div>button {
+    margin-top: 6px;
   }
 `;
 
@@ -55,6 +60,7 @@ class TradeListOperations extends Component {
     super(props);
     this.state = {
       localOnly: true,
+      confirmRestore: false,
     }
   }
   render() {
@@ -74,7 +80,7 @@ class TradeListOperations extends Component {
         </Buttons>
         <WarningSection>
           <p>
-            Checking the 'Database Wipe' box will cause all trade information to
+            Checking the 'Permanent Database Wipe' box will cause all trade information to
             be <b>permanently</b> lost! 
           </p>
           <SettingsButton
@@ -84,9 +90,26 @@ class TradeListOperations extends Component {
             checked={!this.state.localOnly}
           />
         </WarningSection>
+        <WarningSection>
+          <p>
+            If something went terribly wrong or you simply want to restore the Database
+            to it's default state check the box bellow, click the button and reload the page.
+          </p>
+          <div>
+            <SettingsButton 
+              type="checkbox"
+              onChange={() => this.setState({ confirmRestore: !this.state.confirmRestore })}
+              labelText="I've read the above."
+            />
+            <Button
+              text="Restore Default Database"
+              onClick={() => this.props.restoreDefaultDB(this.state.confirmRestore)}
+            />
+          </div>
+        </WarningSection>
       </Wrapper>
     );
   }
 }
 
-export default connect(null, { wipeTrade })(TradeListOperations);
+export default connect(null, { wipeTrade, restoreDefaultDB })(TradeListOperations);

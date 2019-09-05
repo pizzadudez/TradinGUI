@@ -89,7 +89,7 @@ class SettingsBar extends Component {
         <SettingsButton
           type="checkbox"
           onChange={() => this.props.toggleTradedOperations(!this.props.settings.showTradedOperations)}
-          labelText="Show Trade List Operations"
+          labelText="Enable Trade Sessions Menu"
           checked={this.props.settings.showTradedOperations}
         />
         <Divider />

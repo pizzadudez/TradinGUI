@@ -5,6 +5,7 @@ export const SELECT_BANKER = 'SELECT_BANKER';
 export const UPDATE_BANKER = 'UPDATE_BANKER';
 export const CLEAR_SELECTION = 'CLEAR_SELECTION';
 export const WIPE_TRADE = 'WIPE_TRADE';
+export const RESTORE_DEFAULT_DB = 'RESTORE_DEFAULT_DB';
 
 // settings
 export const TOGGLE_BANKERS_TABLE = 'TOGGLE_BANKERS_TABLE';
