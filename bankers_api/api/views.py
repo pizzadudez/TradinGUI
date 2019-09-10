@@ -27,9 +27,10 @@ def restore_default_data(request):
     bankers = Banker.objects.all()
     for banker in bankers:
         default = DefaultBanker.objects.get(id=banker.id)
-        banker.trade_confirmation = default.trade_confirmation
-        banker.trade_timestamp = default.trade_timestamp
-        banker.save()
+        if banker.trade_timestamp != default.trade_timestamp:
+            banker.trade_confirmation = default.trade_confirmation
+            banker.trade_timestamp = default.trade_timestamp
+            banker.save()
 
     return HttpResponse("Success!")
 

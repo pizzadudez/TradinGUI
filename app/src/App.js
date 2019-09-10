@@ -10,9 +10,10 @@ import SettingsBar from './components/SettingsBar';
 import StatsCard from './components/StatsCard';
 
 const GridLayout = styled.div`
+  height: 100vh;
   display: grid;
   grid-template-columns: 0px 320px minmax(421px, 886px) auto 0px;
-  grid-template-rows: auto 330px auto auto;
+  grid-template-rows: max-content 330px auto minmax(160px, max-content);
   grid-row-gap: 15px;
   grid-column-gap: 15px;
   grid-template-areas:
@@ -58,7 +59,6 @@ const StatsCardArea = styled(StatsCard)`
 
 const Footer = styled.div`
   grid-area: footer;
-  height: 120px;
   border-top: 1px solid #424242;
   background: #252323;
 `;

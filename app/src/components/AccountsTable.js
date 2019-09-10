@@ -64,7 +64,7 @@ class AccountsTable extends Component {
 const mapStateToProps = state => ({
   bankers: state.bankers.bankers,
   realms: state.bankers.realms,
-  accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))],
+  accounts: [...new Set(state.bankers.bankers.map(banker => banker.account))].sort(),
   hideTradedBankers: state.settings.hideTradedBankers,
 });
 
