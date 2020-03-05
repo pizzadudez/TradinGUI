@@ -47,7 +47,7 @@ class TradeList extends Component {
       : 'instantly.';
 
     return (`Total of ${numBankers} bankers traded ${timeString}
-      Total ammount of ${totalMilGold} mil gold.`
+      Total amount of ${totalMilGold} mil gold.`
     );
   }
   headerText(session) {
