@@ -6,13 +6,9 @@ import {
   CLEAR_SELECTION,
   WIPE_TRADE,
 } from './types';
-
 import axios from 'axios';
 
-// api urls
-const localhost = 'http://127.0.0.1:8000';
-const pythonanywhere = 'https://vladalbert.pythonanywhere.com';
-const api = pythonanywhere;
+const api = process.env.REACT_APP_API_ENDPOINT;
 
 export const fetchBankers = () => (dispatch) => {
   axios.get(api + '/bankers/?format=json').then((bankers) =>
