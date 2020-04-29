@@ -12,3 +12,4 @@ db.sqlite3
 /external_dbs
 /api/__pycache__
 /api/migrations
+/venv
